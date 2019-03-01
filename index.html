@@ -64,20 +64,32 @@
   <script>
   (function() {
     'use strict';
-
+    // 要素の取得
     var slider = document.getElementById('slider');
     var label = document.getElementById('label');
     var btn = document.getElementById('btn');
     var result = document.getElementById('result');
-
+    // パスワード取得
     function getPassword() {
-      result.value = 'f8asdf8asdf';
-    }
+      var seed = 'abcdefghijklmnopqrstuvxyz';
+      var len = slider.value;
+      var pwd = '';
+      // ランダム生成
+      // for (var i = 0; i < len; i++) {
+      //   pwd += seed[Math.floor(Math.random() * seed.length)];
+      // }
+      // ランダム生成：whileはlenを１文字づつ０になるまで減らす
+      while (len--) {
+        pwd += seed[Math.floor(Math.random() * seed.length)];
+      }
 
+      result.value = pwd;
+    }
+    // スライダーが変更された時の文字数取得
     slider.addEventListener('change', function() {
       label.innerHTML = this.value;
     });
-
+    // ボタンがクリックされた時パスワード取得
     btn.addEventListener('click', function() {
       getPassword();
       // result.value = 'f8asdf8asdf';
